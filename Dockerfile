@@ -29,9 +29,8 @@ RUN  apt-get update \
   && pip install --upgrade pip wheel
 
 # Install TA-lib
-RUN sudo -s
 COPY build_helpers/* /tmp/
-RUN cd /tmp && /tmp/install_ta-lib.sh && rm -r /tmp/*ta-lib*
+RUN sudo cd /tmp && /tmp/install_ta-lib.sh && rm -r /tmp/*ta-lib*
 ENV LD_LIBRARY_PATH /usr/local/lib
 
 # Install dependencies
