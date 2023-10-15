@@ -29,6 +29,7 @@ RUN  apt-get update \
   && pip install --upgrade pip wheel
 
 # Install TA-lib
+RUN sudo chown -R $USER ~/.freqtrade
 COPY build_helpers/* /tmp/
 RUN sudo -s cd /tmp && /tmp/install_ta-lib.sh && sudo rm -r /tmp/*ta-lib*
 ENV LD_LIBRARY_PATH /usr/local/lib
