@@ -7,6 +7,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONFAULTHANDLER 1
 ENV PATH=/home/ftuser/.local/bin:$PATH
 ENV FT_APP_ENV="docker"
+ENV PIP_ROOT_USER_ACTION=ignore
 
 # Prepare environment
 RUN mkdir /freqtrade \
