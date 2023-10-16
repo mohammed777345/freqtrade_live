@@ -31,7 +31,7 @@ RUN  apt-get update \
 
 # Install TA-lib
 COPY build_helpers/* /tmp/
-RUN cd /tmp && sudo ./tmp/install_ta-lib.sh && sudo rm -r /tmp/*ta-lib*
+RUN cd /tmp && sudo -E /tmp/install_ta-lib.sh && sudo rm -r /tmp/*ta-lib*
 ENV LD_LIBRARY_PATH /usr/local/lib
 
 # Install dependencies
