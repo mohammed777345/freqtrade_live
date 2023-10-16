@@ -27,14 +27,16 @@ RUN  apt-get update \
   && apt-get clean \
   && pip install --upgrade pip wheel
 
+# Install dependencies
+COPY --chown=ftuser:ftuser requirements.txt requirements-hyperopt.txt /freqtrade/
+USER ftuser
+
 # Install TA-lib
 COPY build_helpers/* /tmp/
 RUN cd /tmp && /tmp/install_ta-lib.sh && rm -r /tmp/*ta-lib*
 ENV LD_LIBRARY_PATH /usr/local/lib
 
-# Install dependencies
-COPY --chown=ftuser:ftuser requirements.txt requirements-hyperopt.txt /freqtrade/
-USER ftuser
+
 RUN  pip install --user --no-cache-dir numpy \
   && pip install --user --no-cache-dir -r requirements-hyperopt.txt
 
