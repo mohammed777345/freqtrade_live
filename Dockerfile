@@ -7,7 +7,6 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONFAULTHANDLER 1
 ENV PATH=/home/ftuser/.local/bin:$PATH
 ENV FT_APP_ENV="docker"
-ENV PIP_ROOT_USER_ACTION=ignore
 
 # Prepare environment
 RUN mkdir /freqtrade \
@@ -28,18 +27,14 @@ RUN  apt-get update \
   && apt-get clean \
   && pip install --upgrade pip wheel
 
+# Install TA-lib
+COPY build_helpers/* /tmp/
+RUN cd /tmp && /tmp/install_ta-lib.sh && rm -r /tmp/*ta-lib*
+ENV LD_LIBRARY_PATH /usr/local/lib
 
 # Install dependencies
 COPY --chown=ftuser:ftuser requirements.txt requirements-hyperopt.txt /freqtrade/
 USER ftuser
-
-
-# Install TA-lib
-RUN sudo chown -R $USER ~/.freqtrade
-COPY build_helpers/* /tmp/
-RUN sudo -s cd /tmp && /tmp/install_ta-lib.sh && sudo rm -r /tmp/*ta-lib*
-ENV LD_LIBRARY_PATH /usr/local/lib
-
 RUN  pip install --user --no-cache-dir numpy \
   && pip install --user --no-cache-dir -r requirements-hyperopt.txt
 
