@@ -33,7 +33,7 @@ USER ftuser
 
 # Install TA-lib
 COPY build_helpers/* /tmp/
-RUN cd /tmp && /tmp/install_ta-lib.sh && rm -r /tmp/*ta-lib*
+RUN cd /tmp && /tmp/install_ta-lib.sh && sudo rm -r /tmp/*ta-lib*
 ENV LD_LIBRARY_PATH /usr/local/lib
 
 
