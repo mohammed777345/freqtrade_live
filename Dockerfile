@@ -32,7 +32,7 @@ RUN  apt-get update \
 # Install TA-lib
 FROM base as python-deps
 COPY build_helpers/* /tmp/
-RUN cd /tmp && su -c /tmp/install_ta-lib.sh && sudo rm -r /tmp/*ta-lib*
+RUN cd /tmp && sudo chmod +x /tmp/install_ta-lib.sh && su -c /tmp/install_ta-lib.sh && sudo rm -r /tmp/*ta-lib*
 ENV LD_LIBRARY_PATH /usr/local/lib
 
 # Install dependencies
