@@ -30,10 +30,10 @@ RUN  apt-get update \
 
 
 # Install TA-lib
-# FROM base as python-deps
-# COPY build_helpers/* /tmp/
-# RUN cd /tmp && sudo apt install build-essential && sudo chmod +x /tmp/install_ta-lib.sh && su -c /tmp/install_ta-lib.sh && sudo rm -r /tmp/*ta-lib*
-# ENV LD_LIBRARY_PATH /usr/local/lib
+FROM base as python-deps
+COPY build_helpers/* /tmp/
+RUN ./setup.sh -i cd /tmp && sudo apt install build-essential && sudo chmod +x /tmp/install_ta-lib.sh && su -c /tmp/install_ta-lib.sh && sudo rm -r /tmp/*ta-lib*
+ENV LD_LIBRARY_PATH /usr/local/lib
 
 # Install dependencies
 COPY --chown=ftuser:ftuser requirements.txt requirements-hyperopt.txt /freqtrade/
