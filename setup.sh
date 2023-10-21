@@ -305,6 +305,7 @@ function help() {
 }
 
 # Verify if 3.9+ is installed
+deactivate
 check_installed_python
 
 case $* in
